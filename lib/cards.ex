@@ -6,7 +6,7 @@ defmodule Cards do
     ]
     suits = ["Spades", "Hearts", "Clubs", "Diamonds"]
 
-    cards = for suit <- suits, value <- values do
+    for suit <- suits, value <- values do
       "#{value} of #{suit}"
     end
 
@@ -27,6 +27,13 @@ defmodule Cards do
   def save(deck, filename) do
     binary = :erlang.term_to_binary(deck)
     File.write(filename, binary)
+  end
+
+  def load(filename) do
+    case File.read(filename) do
+      {:ok, binary} -> :erlang.binary_to_term binary
+      {:error, _reason} -> "File does not exist"
+    end
   end
 
 end
