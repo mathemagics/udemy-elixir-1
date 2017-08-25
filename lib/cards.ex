@@ -1,4 +1,11 @@
 defmodule Cards do
+  @moduledoc """
+    provides methods for creating and handling a deck of cards
+  """
+
+  @doc """
+    returns a list of strings for a deck of cards
+  """
   def create_deck do
     values = [
       "Ace", "Two", "Three", "Four", "Five", "Six", "Seven",
@@ -20,6 +27,18 @@ defmodule Cards do
     Enum.member?(deck, card)
   end
 
+  @doc """
+    divides a deck into a hand and the remaining cards of the deck.
+    the `count` argument  indicates how many cards should be in thr hand
+
+  ## Examples
+
+      iex> deck = Cards.create_deck
+      iex> {hand, rest} = Cards.deal(deck, 1)
+      hand
+      ["Ace of Spades"]
+
+  """
   def deal(deck, count) do
     Enum.split(deck, count)
   end
