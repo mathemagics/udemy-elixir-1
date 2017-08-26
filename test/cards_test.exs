@@ -12,4 +12,18 @@ defmodule CardsTest do
     refute deck == Cards.shuffle(deck)
   end
 
+  test "save creates a file with the given name" do
+    deck = Cards.create_deck
+    Cards.save(deck, "my_deck")
+    {status, binary} = File.read("my_deck")
+    assert status = :ok
+  end
+
+  test "load returns the saved deck" do
+    deck = Cards.create_deck
+    Cards.save(deck, "my_deck")
+    loaded_deck = Cards.load("my_deck")
+    assert loaded_deck = deck
+  end
+
 end
